@@ -17,7 +17,9 @@ while(playerPosition < Goal){
 
     switch(playerOption){   
         case ladder:
-            playerPosition += DiceRoll;
+            if((playerPosition + DiceRoll) <= Goal){
+                playerPosition = playerPosition + DiceRoll;
+            }
             break;
         case snake:
             if((playerPosition - DiceRoll) <= startPosition){
