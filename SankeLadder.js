@@ -5,18 +5,30 @@ let ladder = 1;
 let snake = 2;
 let Goal = 100;
 
-let playerPosition = 0;
+let player1Playing = true;
+let player1Position = 0;
+let player2Position = 0;
 let DicePlayedTime = 0;
+let playerPosition = 0;
 
-while(playerPosition < Goal){
+while(player1Position < Goal && player2Position < Goal){
 
+    if(player1Playing){
+        console.log("Player 1 playing ");
+        console.log("Player 1 position "+player1Position);
+        playerPosition = player1Position;
+    }else{
+        console.log("Player 2 playing ");
+        console.log("Player 2 position "+player2Position);
+        playerPosition = player2Position;
+    }
 
     let DiceRoll = (Math.floor(Math.random() * 10 ) % 6 ) + 1;
+    console.log("Dice value "+DiceRoll);
     DicePlayedTime ++; 
 
     let playerOption = Math.floor(Math.random() * 10 ) % 3 ; 
 
-    console.log("Dice Value "+DiceRoll);
     
 
     switch(playerOption){  
@@ -33,16 +45,32 @@ while(playerPosition < Goal){
                 playerPosition = startPosition;
             }
             else{
-                playerPosition = playerPosition + DiceRoll;
+                playerPosition = playerPosition - DiceRoll;
             }
             break;
         default:
             console.log("Player Chose No play");
             break;
     }
-    console.log("Position is :"+playerPosition)
+
+    if(player1Playing){
+        player1Position = playerPosition;
+        console.log("Player 1 new Position "+player1Position);
+    }else{
+        player2Position = playerPosition;
+        console.log("Player 2 new Position "+player2Position);
+    }
+
+    if(playerOption != ladder){
+        player1Playing = !(player1Playing);
+    }
+    console.log("\n---------------");
 
 }
-console.log("Number Of Times Plays :"+DicePlayedTime);
-
+console.log("The Number Of times Dice Rolled "+ DicePlayedTime);
+if(player1Position == Goal){
+    console.log("Player 1 won the game");
+}else{
+    console.log("Player 2 won the game");
+}
 
